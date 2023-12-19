@@ -18,4 +18,4 @@ if __name__ == "__main__":
     if not os.path.exists(db_name):
         modules.loadIt(db_name, vcf_annot)
 
-    echo "Done."
+    print("Done.")

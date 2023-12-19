@@ -17,5 +17,3 @@ if __name__ == "__main__":
         modules.runSnpEff(vcf_in, vcf_annot)
     if not os.path.exists(db_name):
         modules.loadIt(db_name, vcf_annot)
-
-    print("Done.")

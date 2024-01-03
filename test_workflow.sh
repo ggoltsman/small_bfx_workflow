@@ -14,6 +14,8 @@ else
 fi
 
 conda activate py3
-pytest && echo "unit tests completed"
+pytest
+echo "unit tests completed"
+
 
 

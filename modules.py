@@ -4,7 +4,10 @@ import sqlite3
 import subprocess
 
 
-def loadIt(db_name, vcf_fn):
+def loadIt(vcf_fn, db_name):
+    table='vcfTable'
+    if os.path.exists(db_name):
+        print(f'Warning: pre-exsiting database {db_name} found. Will create table "{table}" or append if exists.. ')
     print(f"SQLite3 {sqlite3.sqlite_version}")
     conn = sqlite3.connect(db_name)
 
@@ -17,16 +20,21 @@ def loadIt(db_name, vcf_fn):
                 break
 
     df = pandas.read_csv(vcf_fn, sep="\t", skiprows=header_cnt)
-    df.to_sql("vcfTable", conn, index=False)
+    df.to_sql(table, conn, index=False, if_exists='append')  #appends to an existing table! Will not check for duplicates
+
     conn.commit()
     conn.close()
 
 
 def runSnpEff(vcf_in, vcf_out, ref_name="GRCh37.75"):
-
-    #cmd = f"snpEff {ref_name} {vcf_in} > {vcf_out}"  #Running like thiswill use up all the memory on a laptop
-
-    os.system("java -version")
+    import time
+    if os.path.exists(vcf_out):
+        pause=5
+        print(f'Warning: pre-existing annotated vcf file {vcf_out} found. Will OVERWRITE this file in {pause} seconds..!')
+        time.sleep(pause)
+        
+    os.system("java -version")       
+    #cmd = f"snpEff {ref_name} {vcf_in} > {vcf_out}"  #Running like this may use up all the memory on the system
 
     # to avoid memory heap overruns, we call java explicitly on the .jar file. But we first need to find it
     # E.g.,   "/usr/local/Caskroom/miniconda/base/envs/BFX//share/snpeff-5.2-0/snpEff.jar"

@@ -19,7 +19,9 @@ if __name__ == "__main__":
     else:
         vcf_annot = os.path.splitext(os.path.basename(vcf_in))[0] + ".ann.vcf"
 
-    if not args.bootstrap:
+    if args.bootstrap:
+        assert os.path.exists(vcf_annot)
+    else:
         modules.runSnpEff(vcf_in, vcf_annot)
 
     modules.loadIt(vcf_annot, db_name)

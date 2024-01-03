@@ -2,12 +2,15 @@ import os
 import pandas
 import sqlite3
 import subprocess
+import time
 
 
 def loadIt(vcf_fn, db_name):
+    assert os.path.exists(vcf_fn)
+
     table='vcfTable'
     if os.path.exists(db_name):
-        print(f'Warning: pre-exsiting database {db_name} found. Will create table "{table}" or append if exists.. ')
+        print(f'Warning: pre-exsiting database {db_name} found. Will create table "{table}" or APPEND to it, if exists.. ')
     print(f"SQLite3 {sqlite3.sqlite_version}")
     conn = sqlite3.connect(db_name)
 
@@ -22,12 +25,21 @@ def loadIt(vcf_fn, db_name):
     df = pandas.read_csv(vcf_fn, sep="\t", skiprows=header_cnt)
     df.to_sql(table, conn, index=False, if_exists='append')  #appends to an existing table! Will not check for duplicates
 
+    cursor = conn.cursor()
+    query = "select * from " + table    
+    cursor.execute(query)
+    results = cursor.fetchall()
+    print(f'DB table {table} now contains  {len(results)} entries')
+    
     conn.commit()
     conn.close()
 
 
+
+    
 def runSnpEff(vcf_in, vcf_out, ref_name="GRCh37.75"):
-    import time
+    assert os.path.exists(vcf_in)
+    
     if os.path.exists(vcf_out):
         pause=5
         print(f'Warning: pre-existing annotated vcf file {vcf_out} found. Will OVERWRITE this file in {pause} seconds..!')

@@ -1,0 +1,4 @@
+pandas
+sqlite
+pytest
+flake8

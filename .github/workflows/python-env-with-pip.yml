@@ -18,12 +18,12 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
         cache: 'pip'
-	
+
     - name: Install snpEff
       run: |
         wget https://snpeff.blob.core.windows.net/versions/snpEff_latest_core.zip
-	unzip snpEff_latest_core.zip
-	
+        unzip snpEff_latest_core.zip
+
     - name: Install other dependencies with pip
       run: pip install -r requirements.txt
 

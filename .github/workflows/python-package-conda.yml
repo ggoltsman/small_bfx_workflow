@@ -15,7 +15,7 @@ jobs:
       - uses: conda-incubator/setup-miniconda@v3
         with:
           auto-update-conda: true
-	  activate-environment: whatever
+          activate-environment: whatever
           python-version: ${{ matrix.python-version }}
 
       - name: Conda info

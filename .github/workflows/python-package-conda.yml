@@ -15,7 +15,6 @@ jobs:
       - uses: conda-incubator/setup-miniconda@v3
         with:
           auto-update-conda: true
-          activate-environment: whatever
           python-version: ${{ matrix.python-version }}
 
       - name: Conda info
@@ -33,7 +32,6 @@ jobs:
       - name: Lint with flake8
         run: |
           # stop the build if there are Python syntax errors or undefined names
-          which flake8
           flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
 
       - name: run validation & tests

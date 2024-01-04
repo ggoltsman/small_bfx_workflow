@@ -50,10 +50,16 @@ def runSnpEff(vcf_in, vcf_out, ref_name="GRCh37.75"):
 
     # to avoid memory heap overruns, we call java explicitly on the .jar file. But we first need to find it
     # E.g.,   "/usr/local/Caskroom/miniconda/base/envs/BFX//share/snpeff-5.2-0/snpEff.jar"
-    find_jar_cmd = "find $(dirname $(which snpEff))/.. -name snpEff.jar"
-    snpEff_jar = subprocess.run(find_jar_cmd, shell=True, stdout=subprocess.PIPE).stdout.decode('utf-8').split()[0]
-    assert os.path.exists(snpEff_jar)
+    
+    if os.path.exists('./snpEff'):
+        snpEff_jar = './snpEff/snpEff.jar'
+        assert os.path.exists(snpEff_jar)        
+    else: #assume snpEff is installed somewhere and is in my $PATH
+        find_jar_cmd = "find $(dirname $(which snpEff))/.. -name snpEff.jar"
+        snpEff_jar = subprocess.run(find_jar_cmd, shell=True, stdout=subprocess.PIPE).stdout.decode('utf-8').split()[0]
+        assert os.path.exists(snpEff_jar)
 
+        
     cmd = f"java -Xmx8g -jar {snpEff_jar} {ref_name} {vcf_in} > {vcf_out}"
 
     print("Running ", cmd)

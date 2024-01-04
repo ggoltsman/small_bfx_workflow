@@ -1,4 +1,4 @@
-name: Python Package using Conda
+name: Python Package with dependencies managed by pip
 
 on: [push]
 
@@ -9,7 +9,7 @@ jobs:
       fail-fast: false
       matrix:
         os: ["ubuntu-latest", "macos-latest"]
-        python-version: ["3.7", "3.10"]
+        python-version: ["3.7", "3.11"]
 
     steps:
     - uses: actions/checkout@v4

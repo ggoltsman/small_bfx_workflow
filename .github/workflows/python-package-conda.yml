@@ -27,7 +27,7 @@ jobs:
           conda install -c anaconda pandas
           conda install -c bioconda snpEff
           conda install pytest
-	  conda install flake8
+          conda install flake8
 
       - name: Lint with flake8
         run: |

@@ -24,7 +24,6 @@ jobs:
       with:
         java-version: ${{ matrix.java-version }}
         distribution: 'temurin'
-    - run: java HelloWorldApp.java
 
     - name: Install dependencies
       run: |

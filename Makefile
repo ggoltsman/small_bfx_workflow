@@ -15,4 +15,7 @@ lint:
 format:
 	black *.py
 
-all: snpEff_latest_core install test lint format
+all: snpEff install test lint format
+
+clean:
+	rm -rf snpEff

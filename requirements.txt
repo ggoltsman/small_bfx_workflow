@@ -1,4 +1,5 @@
 pandas
-sqlite
 pytest
+pylint
 flake8
+black

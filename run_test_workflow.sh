@@ -12,7 +12,7 @@ else
 fi
 
 pytest test_results.py
-echo "unit tests completed"
+echo "results tested successfully"
 
 
 

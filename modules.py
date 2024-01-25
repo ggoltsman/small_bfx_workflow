@@ -52,11 +52,9 @@ def runSnpEff(vcf_in, vcf_out, ref_name="GRCh37.75"):
         time.sleep(pause)
 
     os.system("java -version")
-    # cmd = f"snpEff {ref_name} {vcf_in} > {vcf_out}"  #Running like this may use up all the memory on the system
 
-    # to avoid memory heap overruns, we call java explicitly on the .jar file. But we first need to find it
-    # E.g.,   "/usr/local/Caskroom/miniconda/base/envs/BFX//share/snpeff-5.2-0/snpEff.jar"
-
+    # cmd = f"snpEff {ref_name} {vcf_in} > {vcf_out}"  #Running like this may use up all the memory on the system;
+    # To avoid memory heap overruns, we call java explicitly on the .jar file. But we first need to find it
     if os.path.exists("./snpEff"):
         snpEff_jar = "./snpEff/snpEff.jar"
         assert os.path.exists(snpEff_jar)

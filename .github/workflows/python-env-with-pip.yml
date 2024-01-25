@@ -26,7 +26,7 @@ jobs:
     - name: Run tests
       run: |
         make test lint
-	
+
     - name: flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
@@ -35,5 +35,4 @@ jobs:
     - name: Run validation & test results
       run: |
         ./run_test_workflow.sh
-      
-      
+

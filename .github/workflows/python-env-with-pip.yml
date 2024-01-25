@@ -10,7 +10,7 @@ jobs:
       matrix:
         os: ["ubuntu-latest", "macos-latest"]
         python-version: ["3.7", "3.11"]
-        java-version: [11]
+        java-version: ["21"]
     steps:
     - uses: actions/checkout@v4
     - name: Set up Python
@@ -32,7 +32,7 @@ jobs:
         # stop the build if there are Python syntax errors or undefined names
         flake8 . --extend-exclude snpEff --count --select=E9,F63,F7,F82 --show-source --statistics
 
-    #- name: Run validation & test results
-    #  run: |
-    #    ./run_test_workflow.sh
+    - name: Run validation & test results
+      run: |
+        ./run_test_workflow.sh
 

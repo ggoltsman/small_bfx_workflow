@@ -8,12 +8,23 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
     parser.add_argument("-v", "--vcf", help="vcf file", required=True)
-    parser.add_argument("-o", "--out_pref", help="output prefix (defaut: same as input vcf)", required=False)
-    parser.add_argument("-b", "--bootstrap", help="bootstrap from existing annotated vcf (bypasses snpEff)", action='store_true', required=False)        
+    parser.add_argument(
+        "-o",
+        "--out_pref",
+        help="output prefix (defaut: same as input vcf)",
+        required=False,
+    )
+    parser.add_argument(
+        "-b",
+        "--bootstrap",
+        help="bootstrap from existing annotated vcf (bypasses snpEff)",
+        action="store_true",
+        required=False,
+    )
     args = parser.parse_args()
 
     vcf_in = args.vcf
-    
+
     if args.out_pref:
         vcf_annot = args.out_pref + ".ann.vcf"
     else:

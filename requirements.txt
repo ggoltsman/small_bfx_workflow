@@ -1,3 +1,4 @@
+install-jdk
 pandas
 pytest
 flake8

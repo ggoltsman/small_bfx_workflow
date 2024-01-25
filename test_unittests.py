@@ -1,23 +1,21 @@
+import os
+import pandas
 import sqlite3
+from modules import loadIt
 
 
-class TestSQLQueries:
-    db_name = "vcf.db"
+def setup_function(function):
+    print("Running setup: %s" % {function.__name__})
+    function.vcf_fn = "data/unit_test.vcf"
+    function.db_name = "unit_test_db"
+    function.conn = sqlite3.connect(function.db_name)
 
-    def test_select_pos(self):
-        conn = sqlite3.connect(self.db_name)
-        cur = conn.cursor()
 
-        cur.execute("SELECT * FROM vcfTable WHERE POS = 17073043")
-        res = cur.fetchall()
-        assert res[0][1] == 17073043, "Position unit test failed."
-        conn.close()
+def teardown_function(function):
+    print("Running Teardown: %s" % {function.__name__})
+    function.conn.close()
 
-    def test_annot(self):
-        conn = sqlite3.connect(self.db_name)
-        cur = conn.cursor()
 
-        cur.execute("SELECT * FROM vcfTable WHERE POS = 17073043")
-        res = cur.fetchall()
-        assert res[0][-1].startswith("ANN="), "Annotation unit test failed."
-        conn.close()
+def test_loadIt():
+    assert loadIt(test_loadIt.vcf_fn, test_loadIt.db_name) == 1
+    os.remove(test_loadIt.db_name)

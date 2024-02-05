@@ -24,6 +24,11 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     vcf_in = args.vcf
+    if not os.path.exists(vcf_in):
+        raise SystemExit('Input vcf file does not exist')
+    
+
+
 
     if args.out_pref:
         vcf_annot = args.out_pref + ".ann.vcf"

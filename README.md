@@ -1,6 +1,4 @@
-# small_bfx_workflow
-
-The workflow run snpEff on a bare-bomes vcf file and produces an annotated vcf which is then entered into an sqlite3 database
+The workflow runs snpEff on a bare-bomes vcf file and produces an annotated vcf which is then entered into an sqlite3 database
 
 
 INSTALLL:
